@@ -2,12 +2,8 @@ import React, { useEffect } from 'react'
 import { Link,useNavigate,useLocation } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-
-import  { toast } from 'react-toastify'
 import auth from '../../../firebase.init';
-
-
-
+import  { toast } from 'react-toastify'
 
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
