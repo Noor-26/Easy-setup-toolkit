@@ -7,11 +7,11 @@ import  { toast } from 'react-toastify'
 import { BiImageAdd } from 'react-icons/bi';
 import axios from 'axios'
 import Loading from '../../shared/Loading/Loading';
+import useToken from '../../shared/useToken/useToken';
 
 
 function Register() {
   const { register, formState: { errors }, handleSubmit } = useForm();
-  
   const [ 
     createUserWithEmailAndPassword,
     user,
@@ -22,6 +22,7 @@ function Register() {
   const location = useLocation()
   const navigate = useNavigate()
   let from = location.state?.from?.pathname || '/'
+  const [token] = useToken(user)
 
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function Register() {
     if(error || updateError){
         toast.error(error.message ||updateError.message )
     }
+
 }, [error,updateError])
 
 const onSubmit = async data => {
@@ -40,7 +42,7 @@ const onSubmit = async data => {
     return <Loading/>
  }
  
- if(user){
+ if(token){
     navigate(from,{replace:true})
   
 }
