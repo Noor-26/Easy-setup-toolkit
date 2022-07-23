@@ -11,8 +11,6 @@ import Loading from '../../shared/Loading/Loading';
 
 function Register() {
   const { register, formState: { errors }, handleSubmit } = useForm();
-//   const [photoURL, setPhotoURL] = useState('');
-//   const [displayName, setDisplayName] = useState('');
   
   const [ 
     createUserWithEmailAndPassword,
@@ -24,7 +22,6 @@ function Register() {
   const location = useLocation()
   const navigate = useNavigate()
   let from = location.state?.from?.pathname || '/'
- 
 
 
   useEffect(() => {
@@ -33,17 +30,19 @@ function Register() {
         toast.error(error.message ||updateError.message )
     }
 }, [error,updateError])
+
 const onSubmit = async data => {
     await createUserWithEmailAndPassword(data.email, data.password)
-    await updateProfile({ displayName: data.name,photoURL: data.image })
+    await updateProfile({ displayName: data.name, photoURL: data.image })
   };
+
  if(loading || updating){
     return <Loading/>
  }
  
  if(user){
     navigate(from,{replace:true})
-    console.log(user)
+  
 }
   return (
     <div className='flex h-auto justify-center items-center pt-16'>

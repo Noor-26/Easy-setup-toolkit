@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import  { toast } from 'react-toastify'
+import Loading from '../../shared/Loading/Loading';
 
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -30,7 +31,9 @@ function Login() {
         navigate(from,{replace:true})
     }
    
-  
+  if(loading){
+    return <Loading/>
+  }
   return (
     <div className='flex h-screen justify-center items-center '>
     <div className='card w-96 bg-base-100 shadow-xl p-4'>
